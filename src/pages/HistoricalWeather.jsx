@@ -17,7 +17,7 @@ const QUICK_RANGES = [
 ]
 
 export default function HistoricalWeather() {
-  const { location, locationError } = useLocation()
+  const { location, locationError, fetchLocation } = useLocation()
   
   const [endDate, setEndDate] = useState(new Date())
   const [startDate, setStartDate] = useState(subDays(new Date(), 7))
@@ -42,7 +42,7 @@ export default function HistoricalWeather() {
   }
 
   if (locationError) {
-    return <ErrorState message={locationError} isLocationError={true} />
+    return <ErrorState message={locationError} isLocationError={true} onRetry={fetchLocation} />
   }
 
   if (!location) {

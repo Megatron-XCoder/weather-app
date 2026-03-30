@@ -1,8 +1,12 @@
 import { AlertCircle, MapPinOff, RefreshCw } from 'lucide-react'
 
-export default function ErrorState({ message, isLocationError = false }) {
+export default function ErrorState({ message, isLocationError = false, onRetry }) {
   const handleReload = () => {
-    window.location.reload()
+    if (onRetry) {
+      onRetry()
+    } else {
+      window.location.reload()
+    }
   }
 
   return (

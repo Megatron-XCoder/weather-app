@@ -10,14 +10,14 @@ import ErrorState from '../components/ErrorState'
 import { CloudRain } from 'lucide-react'
 
 export default function CurrentWeather() {
-  const { location, locationError } = useLocation()
+  const { location, locationError, fetchLocation } = useLocation()
   const [selectedDate, setSelectedDate] = useState(new Date())
   const [isFahrenheit, setIsFahrenheit] = useState(false)
 
   const { data, loading, error } = useWeatherDay(location?.lat, location?.lon, selectedDate)
 
   if (locationError) {
-    return <ErrorState message={locationError} isLocationError={true} />
+    return <ErrorState message={locationError} isLocationError={true} onRetry={fetchLocation} />
   }
 
   if (loading || !location) {
