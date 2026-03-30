@@ -1,8 +1,19 @@
 import { AlertCircle, MapPinOff, RefreshCw } from 'lucide-react'
 
 export default function ErrorState({ message, isLocationError = false, onRetry }) {
-  const handleReload = () => {
+  const handleReload = async () => {
     if (onRetry) {
+      if (isLocationError && navigator.permissions) {
+        try {
+          const perm = await navigator.permissions.query({ name: 'geolocation' })
+          if (perm.state === 'denied') {
+            alert('Your browser is blocking location access. Please click the lock/location icon in your address bar to allow permissions, then try again.')
+            return
+          }
+        } catch (e) {
+          // ignore if permissions api is not fully supported
+        }
+      }
       onRetry()
     } else {
       window.location.reload()

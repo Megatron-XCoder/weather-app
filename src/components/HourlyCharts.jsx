@@ -154,7 +154,7 @@ export default function HourlyCharts({ weather, aqi, isFahrenheit, onToggleFahre
 
       {/* Premium Horizontal Scroll Forecast */}
       <div className="glass-card p-4 md:p-6 mb-8 overflow-hidden rounded-[24px]">
-        <div className="flex gap-4 md:gap-6 overflow-x-auto pb-4 snap-x snap-mandatory hide-scroll-bar" style={{ scrollbarWidth: 'none' }}>
+        <div className="flex gap-4 md:gap-6 overflow-x-auto pb-4 hide-scroll-bar" style={{ scrollbarWidth: 'none' }}>
           {tempData.map((d, i) => {
             const hourInt = parseInt(d.time.split(':')[0])
             const isDay = hourInt >= 6 && hourInt <= 18
@@ -162,7 +162,7 @@ export default function HourlyCharts({ weather, aqi, isFahrenheit, onToggleFahre
             // Show up to 24 hours
             if (i > 24) return null
             return (
-              <div key={i} className="flex flex-col items-center justify-between min-w-[70px] snap-center shrink-0 py-2 hover-scale">
+              <div key={i} className="flex flex-col items-center justify-between min-w-[70px] shrink-0 py-2 hover-scale">
                 <span className="text-zinc-400 text-sm font-semibold mb-3">{d.time}</span>
                 <span className="text-3xl mb-3 drop-shadow-lg filter transition-transform hover:scale-110">
                   {getWeatherIcon(weatherCodes[i], isDay)}
